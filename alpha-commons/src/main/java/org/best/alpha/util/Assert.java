@@ -1,16 +1,19 @@
-package org.best.alpha.manager;
-
-import org.best.alpha.exception.AssertException;
+package org.best.alpha.util;
 
 import java.util.Collection;
 
-public class AssertManager {
+public class Assert {
 
     public static void isNull(Object object, String message) {
         if (object == null) {
-            throw new AssertException(message);
+            throw new NullPointerException(message);
         }
     }
+
+    public static boolean isNull(Object object) {
+        return object == null;
+    }
+
 
     public static boolean isEmptyText(String text) {
         return text == null || "".equals(text);

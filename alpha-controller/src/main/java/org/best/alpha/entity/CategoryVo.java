@@ -1,6 +1,8 @@
 package org.best.alpha.entity;
 
-public class CategoryVo {
+import org.best.alpha.base.BaseVo;
+
+public class CategoryVo extends BaseVo {
 
     private Integer id;
 

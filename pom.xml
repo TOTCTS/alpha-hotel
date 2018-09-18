@@ -13,6 +13,7 @@
         <module>alpha-service</module>
         <module>alpha-manager</module>
         <module>alpha-dao</module>
+        <module>alpha-commons</module>
     </modules>
 
     <properties>
@@ -27,6 +28,12 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <dependency>
+                <groupId>org.best.alpha</groupId>
+                <artifactId>alpha-commons</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -195,6 +202,11 @@
     </dependencyManagement>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.best.alpha</groupId>
+            <artifactId>alpha-commons</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>

@@ -1,7 +1,8 @@
 package org.best.alpha.service;
 
 import org.best.alpha.entity.CategoryPo;
-import org.best.alpha.manager.AssertManager;
+import org.best.alpha.exception.NotFoundException;
+import org.best.alpha.util.Assert;
 import org.best.alpha.manager.CategoryManager;
 import org.best.alpha.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService{
 
         categoryManager.checkEntity(categoryPo);
 
-        AssertManager.isNull(categoryPo.getId(), "Id of entity updated is not null!");
+        Assert.isNull(categoryPo.getId(), "id of entity updated is null!");
 
         categoryMapper.update(categoryPo);
 
@@ -47,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void delete(Integer id) {
 
-        AssertManager.isNull(id, "Id of entity deleted is not null!");
+        Assert.isNull(id, "id of entity deleted is null!");
 
         categoryMapper.remove(id);
 
@@ -56,9 +57,12 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public CategoryPo findById(Integer id) {
 
-        AssertManager.isNull(id, "Id of entity found is not null!");
-
-        return categoryMapper.findById(id);
+        Assert.isNull(id, "id of entity found is null!");
+        CategoryPo categoryPo = categoryMapper.findById(id);
+        if (Assert.isNull(categoryPo)) {
+            throw new NotFoundException("resource is not exist for id specified");
+        }
+        return categoryPo;
     }
 
     @Override
@@ -69,7 +73,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public List<CategoryPo> findByCategoryName(String categoryName) {
 
-        boolean emptyText = AssertManager.isEmptyText(categoryName);
+        boolean emptyText = Assert.isEmptyText(categoryName);
 
         if (emptyText) {
             return new ArrayList<>();

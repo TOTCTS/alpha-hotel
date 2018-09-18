@@ -1,7 +1,7 @@
 package org.best.alpha.response;
 
-import org.best.alpha.manager.AssertManager;
-import org.springframework.http.HttpStatus;
+import org.best.alpha.enums.ResponseStatus;
+import org.best.alpha.util.Assert;
 
 public class AppResponse {
 
@@ -11,43 +11,50 @@ public class AppResponse {
 
     private Object data;
 
-    private AppResponse(HttpStatus httpStatus, Object data) {
-        AssertManager.isNull(httpStatus, "HttpStatus is not null!");
-        this.code  = httpStatus.value();
-        this.message = httpStatus.getReasonPhrase();
+    private AppResponse(ResponseStatus responseStatus, Object data) {
+        Assert.isNull(responseStatus, "HttpStatus is null!");
+        this.code  = responseStatus.getStatus();
+        this.message = responseStatus.getMessage();
         this.data = data;
     }
 
     public static AppResponse success() {
-        return AppResponse.success(null);
+        return AppResponse.success((Object) null);
     }
 
+    public static AppResponse success(ResponseStatus responseStatus) {
+        return AppResponse.success(responseStatus, null);
+    }
 
     public static AppResponse success(Object data) {
-        HttpStatus ok = HttpStatus.OK;
+        ResponseStatus ok = ResponseStatus.OK;
         return AppResponse.success(ok, data);
     }
 
-    public static AppResponse success(HttpStatus httpStatus, Object date) {
-        return AppResponse.instance(httpStatus, date);
+    public static AppResponse success(ResponseStatus responseStatus, Object date) {
+        return AppResponse.instance(responseStatus, date);
     }
 
     public static AppResponse failure() {
-        return AppResponse.failure(null);
+        return AppResponse.failure((Object) null);
+    }
+
+    public static AppResponse failure(ResponseStatus responseStatus) {
+        return AppResponse.failure(responseStatus, null);
     }
 
     public static AppResponse failure(Object data) {
-        HttpStatus expectationFailed = HttpStatus.EXPECTATION_FAILED;
-        return AppResponse.failure(expectationFailed, data);
+        ResponseStatus serviceUnavailable = ResponseStatus.SERVICE_UNAVAILABLE;
+        return AppResponse.failure(serviceUnavailable, data);
     }
 
-    public static AppResponse failure(HttpStatus httpStatus, Object date) {
+    public static AppResponse failure(ResponseStatus httpStatus, Object date) {
         return AppResponse.instance(httpStatus, date);
     }
 
 
-    public static AppResponse instance(HttpStatus httpStatus, Object data) {
-        return new AppResponse(httpStatus, data);
+    private static AppResponse instance(ResponseStatus responseStatus, Object data) {
+        return new AppResponse(responseStatus, data);
     }
 
     public Integer getCode() {
