@@ -19,7 +19,7 @@ public class Assert {
         return text == null || "".equals(text);
     }
 
-    public static boolean isEmptyCollection(Collection<Object> collection) {
+    public static boolean isEmptyCollection(Collection<?> collection) {
         return collection == null || collection.size() == 0;
     }
 }

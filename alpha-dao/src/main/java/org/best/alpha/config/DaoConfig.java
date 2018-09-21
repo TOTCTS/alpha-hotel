@@ -23,7 +23,7 @@ import java.io.IOException;
 public class DaoConfig implements TransactionManagementConfigurer {
 
 //    @Value(DaoConstant.Jdbc.DRIVER_CLASS_NAME)
-    private String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    private String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
 //    @Value(DaoConstant.Jdbc.URL)
     private String URL = "jdbc:mysql://localhost:3306/hotel";

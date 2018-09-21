@@ -28,6 +28,8 @@ public class CategoryServiceImpl implements CategoryService{
 
         categoryManager.checkEntity(categoryPo);
 
+        categoryManager.validateData(categoryPo);
+
         categoryMapper.put(categoryPo);
 
         return categoryPo;

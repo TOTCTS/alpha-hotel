@@ -5,14 +5,16 @@ import org.best.alpha.util.Assert;
 
 public class AppResponse {
 
+    private Boolean success;
     private Integer code;
 
     private String message;
 
     private Object data;
 
-    private AppResponse(ResponseStatus responseStatus, Object data) {
+    private AppResponse(Boolean success, ResponseStatus responseStatus, Object data) {
         Assert.isNull(responseStatus, "HttpStatus is null!");
+        this.success = success;
         this.code  = responseStatus.getStatus();
         this.message = responseStatus.getMessage();
         this.data = data;
@@ -32,7 +34,7 @@ public class AppResponse {
     }
 
     public static AppResponse success(ResponseStatus responseStatus, Object date) {
-        return AppResponse.instance(responseStatus, date);
+        return AppResponse.instance(true, responseStatus, date);
     }
 
     public static AppResponse failure() {
@@ -49,12 +51,20 @@ public class AppResponse {
     }
 
     public static AppResponse failure(ResponseStatus httpStatus, Object date) {
-        return AppResponse.instance(httpStatus, date);
+        return AppResponse.instance(false, httpStatus, date);
     }
 
 
-    private static AppResponse instance(ResponseStatus responseStatus, Object data) {
-        return new AppResponse(responseStatus, data);
+    private static AppResponse instance(Boolean success, ResponseStatus responseStatus, Object data) {
+        return new AppResponse(success, responseStatus, data);
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
     public Integer getCode() {
@@ -84,7 +94,8 @@ public class AppResponse {
     @Override
     public String toString() {
         return "AppResponse{" +
-                "code=" + code +
+                "success=" + success +
+                ", code=" + code +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';

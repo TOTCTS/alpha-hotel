@@ -16,6 +16,8 @@ public enum ResponseStatus {
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED.value(),
             HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase()),
 
+    DUPLICATION(HttpStatus.BAD_REQUEST.value(), "value of entity is duplicated"),
+
     PARAMETER(HttpStatus.BAD_REQUEST.value(), "parameter given is exception!");
     private Integer status;
 

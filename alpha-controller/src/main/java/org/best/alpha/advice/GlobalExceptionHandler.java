@@ -1,6 +1,7 @@
 package org.best.alpha.advice;
 
 import org.best.alpha.enums.ResponseStatus;
+import org.best.alpha.exception.ConstraintViolationException;
 import org.best.alpha.exception.NotFoundException;
 import org.best.alpha.exception.ParameterException;
 import org.best.alpha.response.AppResponse;
@@ -24,6 +25,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ParameterException.class)
     public AppResponse parameterException() {
         return AppResponse.failure(ResponseStatus.FOUND);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public AppResponse constraintViolationException(ConstraintViolationException e) {
+        return AppResponse.failure(ResponseStatus.DUPLICATION);
     }
 
     @ExceptionHandler(Exception.class)

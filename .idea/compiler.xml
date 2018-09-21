@@ -6,6 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="alpha-commons" />
+        <module name="alpha-controller" />
+        <module name="alpha-dao" />
+        <module name="alpha-manager" />
+        <module name="alpha-service" />
         <module name="alphacommons" />
         <module name="alphacontroller" />
         <module name="alphadao" />
@@ -13,5 +18,13 @@
         <module name="alphaservice" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="alpha-commons" target="1.7" />
+      <module name="alpha-controller" target="8" />
+      <module name="alpha-dao" target="1.7" />
+      <module name="alpha-hotel" target="1.7" />
+      <module name="alpha-manager" target="1.7" />
+      <module name="alpha-service" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
